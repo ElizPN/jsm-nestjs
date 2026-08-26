@@ -1,0 +1,12 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.run": "onSave",
+
+  "errorLens.followCursor": "allLinesExceptActive",
+  "errorLens.delay": 1500,
+  "errorLens.enabledDiagnosticLevels": ["error", "warning"]
+}
