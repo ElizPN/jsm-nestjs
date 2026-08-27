@@ -8,18 +8,6 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
   @Get()
   getUsers(@Query('name') name: string) {
-    // const users = [
-    //   { id: 1, name: 'John Doe' },
-    //   { id: 2, name: 'Adrian' },
-    // ];
-
-    // if (name) {
-    //   return users.filter((user) =>
-    //     user.name.toLowerCase().includes(name.toLowerCase()),
-    //   );
-    // }
-    // return users;
-
     return this.userService.findAllUsers(name);
   }
 
