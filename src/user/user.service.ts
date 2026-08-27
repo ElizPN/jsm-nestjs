@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { LoggerService } from './user.logger';
 
 // what a user IS in our system
 export interface User {
@@ -9,12 +10,14 @@ export interface User {
 
 @Injectable()
 export class UserService {
+  constructor(private readonly logger: LoggerService) {}
   private users: User[] = [
     { id: 1, name: 'John Doe', email: 'john@doe' },
     { id: 2, name: 'Adrian', email: 'adrian@kelm' },
   ];
 
   findAllUsers(name: string = '') {
+    this.logger.log('Finding all the users');
     return this.users.filter((user) =>
       user.name.toLowerCase().includes(name.toLowerCase()),
     );
