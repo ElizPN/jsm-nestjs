@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { LoggerService } from './user.logger';
 
 // what a user IS in our system
@@ -22,6 +22,22 @@ export class UserService {
       user.name.toLowerCase().includes(name.toLowerCase()),
     );
   }
+
+  findOneUser(id: number) {
+    this.logger.log('Find a user');
+    const user = this.users.find((user) => user.id === id);
+
+    if (!user) {
+      throw new NotFoundException(`User with id ${id} not found`);
+    }
+
+    return user;
+  }
+
+  // findOneUser(id: number)
+  // createUser(dto: CreateUserDto)
+  // updateUser(id: number, dto: UpdateUserDto)
+  // deleteUser(id: number)
 
   // - this.users — this refers to the UserService instance,
   // so this reads the private array declared on line 11.
