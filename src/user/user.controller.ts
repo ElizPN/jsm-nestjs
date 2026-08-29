@@ -5,7 +5,7 @@ import {
   Param,
   Post,
   Body,
-  Put,
+  Patch,
   ParseIntPipe,
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -30,11 +30,11 @@ export class UserController {
     return this.userService.createUser(createUserDto);
   }
 
-  @Put(':id')
-  updateUser(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return {
-      data: { id, ...updateUserDto },
-      message: 'User updated successfully',
-    };
+  @Patch(':id')
+  updateUser(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateUserDto: UpdateUserDto,
+  ) {
+    return this.userService.updateUser(id, updateUserDto);
   }
 }
