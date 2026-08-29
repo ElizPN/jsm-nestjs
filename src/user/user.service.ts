@@ -60,9 +60,16 @@ export class UserService {
     return Object.assign(currentUser, dto);
   }
 
-  // createUser(dto: CreateUserDto)
-  // updateUser(id: number, dto: UpdateUserDto)
-  // deleteUser(id: number)
+  deleteUser(id: number) {
+    this.logger.log('Deleting a user');
+
+    // throws NotFoundException if the id does not exist
+    const user = this.findOneUser(id);
+
+    this.users.splice(this.users.indexOf(user), 1);
+
+    return user;
+  }
 
   // - this.users — this refers to the UserService instance,
   // so this reads the private array declared on line 11.
