@@ -1,7 +1,14 @@
 // what the CLIENT must send to create one
 
+import { IsString, IsNotEmpty, IsEmail } from 'class-validator';
+
 export class CreateUserDto {
+  @IsString()
+  @IsNotEmpty()
   name!: string;
+
+  @IsEmail()
+  email!: string;
 }
 
 // "the body of this request should be an object with a name property that's a string."

@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { LoggerService } from './user.logger';
+import { CreateUserDto } from './dto/create-user.dto';
 
 // what a user IS in our system
 export interface User {
@@ -15,6 +16,9 @@ export class UserService {
     { id: 1, name: 'John Doe', email: 'john@doe' },
     { id: 2, name: 'Adrian', email: 'adrian@kelm' },
   ];
+
+  // next id to hand out; incremented on every create so ids are never reused
+  private nextId = 3;
 
   findAllUsers(name: string = '') {
     this.logger.log('Finding all the users');
@@ -34,7 +38,19 @@ export class UserService {
     return user;
   }
 
-  // findOneUser(id: number)
+  createUser(dto: CreateUserDto) {
+    this.logger.log('Creating a user');
+    const user: User = {
+      id: this.nextId++,
+      name: dto.name,
+      email: dto.email,
+    };
+
+    this.users.push(user);
+
+    return user;
+  }
+
   // createUser(dto: CreateUserDto)
   // updateUser(id: number, dto: UpdateUserDto)
   // deleteUser(id: number)
