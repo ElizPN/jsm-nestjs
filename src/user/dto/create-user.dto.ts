@@ -1,10 +1,11 @@
 // what the CLIENT must send to create one
 
-import { IsString, IsNotEmpty, IsEmail } from 'class-validator';
+import { IsString, IsNotEmpty, IsEmail, MinLength } from 'class-validator';
 
 export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
+  @MinLength(3)
   name!: string;
 
   @IsEmail()
